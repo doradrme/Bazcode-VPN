@@ -52,7 +52,6 @@ jobs:
       - name: Show environment
         run: |
           java -version
-          sdkmanager --list_installed
           cd V2rayNG
           chmod +x gradlew
           ./gradlew --version
