@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:showIn="navigation_view">
+ <group android:id="@+id/group_main">
+  <item android:id="@+id/sub_setting" android:icon="@drawable/ic_subscriptions_white_24dp" android:title="@string/title_sub_setting" />
+  <item android:id="@+id/vpn_share" android:icon="@drawable/ic_v" android:checkable="true" android:checked="true" android:title="@string/baz_share_title" />
+  <item android:id="@+id/settings" android:icon="@drawable/ic_settings_white_24dp" android:title="@string/title_settings" />
+  <item android:id="@+id/logcat" android:icon="@drawable/ic_logcat_white_24dp" android:title="@string/title_logcat" />
+  <item android:id="@+id/placeholder" android:enabled="false" android:title="" />
+ </group>
+</menu>

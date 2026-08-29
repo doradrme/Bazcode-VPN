@@ -1,0 +1,9 @@
+PROJECT ASSEMBLY NOTE
+=====================
+This package was assembled from:
+1. Clean official v2rayNG 1.6.30 source archive.
+2. V2rayNG/app replaced completely by the user's latest app.zip.
+3. No app files from previous generated Bazcode patch ZIPs were merged.
+4. Added only GitHub metadata/workflow files outside the app.
+
+Use this full project as the single source of truth going forward.

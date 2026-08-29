@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">بازکد</string>
+    <string name="app_widget_name">Switch</string>
+    <string name="app_tile_name">Switch</string>
+    <string name="app_tile_first_use">First use of this feature, please use the app to add server</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="migration_success">Data migration success!</string>
+    <string name="migration_fail">Data migration failed!</string>
+
+    <!-- Notifications -->
+    <string name="notification_action_stop_v2ray">قطع اتصال</string>
+    <string name="toast_permission_denied">Unable to obtain the permission</string>
+    <string name="notification_action_more">click for more</string>
+    <string name="toast_services_start">در حال اتصال</string>
+    <string name="toast_services_stop">در حال قطع</string>
+    <string name="toast_services_success">اتصال برقرار شد</string>
+    <string name="toast_services_failure">اتصال ناموفق بود</string>
+
+    <!--ServerActivity-->
+    <string name="title_server">بازکد</string>
+    <string name="menu_item_add_config">افزودن کانفیگ</string>
+    <string name="menu_item_save_config">ذخیره</string>
+    <string name="menu_item_del_config">حذف کانفیگ</string>
+    <string name="menu_item_import_config_qrcode">وارد کردن از QR</string>
+    <string name="menu_item_import_config_clipboard">وارد کردن از کلیپ‌بورد</string>
+    <string name="menu_item_import_config_manually_vmess">افزودن VMess</string>
+    <string name="menu_item_import_config_manually_ss">افزودن Shadowsocks</string>
+    <string name="menu_item_import_config_manually_socks">افزودن SOCKS</string>
+    <string name="menu_item_import_config_custom">کانفیگ سفارشی</string>
+    <string name="menu_item_import_config_custom_clipboard">Import custom config from Clipboard</string>
+    <string name="menu_item_import_config_custom_local">Import custom config from locally</string>
+    <string name="menu_item_import_config_custom_url">Import custom config from URL</string>
+    <string name="menu_item_import_config_custom_url_scan">Import custom config scan URL</string>
+    <string name="del_config_comfirm">Confirm delete？</string>
+    <string name="server_lab_remarks">نام کانفیگ</string>
+    <string name="server_lab_address">آدرس سرور</string>
+    <string name="server_lab_port">پورت</string>
+    <string name="server_lab_id">id</string>
+    <string name="server_lab_security">امنیت</string>
+    <string name="server_lab_network">نوع شبکه</string>
+    <string name="server_lab_more_function">تنظیمات بیشتر</string>
+    <string name="server_lab_head_type">head type</string>
+    <string name="server_lab_mode_type">gRPC mode</string>
+    <string name="server_lab_request_host">Host / SNI</string>
+    <string name="server_lab_path">Path / Service Name</string>
+    <string name="server_lab_stream_security">TLS</string>
+    <string name="server_lab_allow_insecure">اجازه گواهی نامعتبر</string>
+    <string name="server_lab_address3">address</string>
+    <string name="server_lab_port3">port</string>
+    <string name="server_lab_id3">password</string>
+    <string name="server_lab_security3">security</string>
+    <string name="toast_success">انجام شد</string>
+    <string name="toast_failure">ناموفق</string>
+    <string name="toast_none_data">داده‌ای وجود ندارد</string>
+    <string name="toast_incorrect_protocol">Incorrect protocol</string>
+    <string name="toast_decoding_failed">Decoding failed</string>
+    <string name="title_file_chooser">Select a Config File</string>
+    <string name="toast_require_file_manager">Please install a File Manager.</string>
+    <string name="server_customize_config">Customize Config</string>
+    <string name="toast_config_file_invalid">Invalid Config</string>
+    <string name="server_lab_content">Content</string>
+    <string name="toast_none_data_clipboard">کلیپ‌بورد خالی است</string>
+    <string name="toast_invalid_url">Invalid URL</string>
+    <string name="server_lab_need_inbound">Ensure inbound has socks=10808,http=10809</string>
+
+    <!-- PerAppProxyActivity -->
+    <string name="msg_dialog_progress">در حال بارگذاری</string>
+    <string name="menu_item_select_all">انتخاب همه</string>
+    <string name="msg_enter_keywords">جستجو</string>
+    <string name="switch_bypass_apps_mode">حالت عبور مستقیم</string>
+    <string name="menu_item_select_proxy_app">انتخاب خودکار برنامه‌ها</string>
+    <string name="msg_downloading_content">در حال دریافت اطلاعات</string>
+
+
+    <!-- Preferences -->
+    <string name="title_settings">تنظیمات</string>
+    <string name="title_advanced">تنظیمات پیشرفته</string>
+    <string name="title_vpn_settings">تنظیمات VPN</string>
+    <string name="title_pref_per_app_proxy">پروکسی برای برنامه‌های انتخابی</string>
+    <string name="summary_pref_per_app_proxy">تعیین برنامه‌هایی که از VPN استفاده کنند. در بعضی نسخه‌های قدیمی اندروید ممکن است محدود باشد.</string>
+
+    <string name="title_pref_mux_enabled">Enable Mux</string>
+    <string name="summary_pref_mux_enabled">Enable maybe speed up network and switch network maybe flash</string>
+
+    <string name="title_pref_speed_enabled">نمایش سرعت اتصال</string>
+    <string name="summary_pref_speed_enabled">سرعت لحظه‌ای دریافت و ارسال را در اعلان VPN نمایش می‌دهد.</string>
+
+    <string name="title_pref_sniffing_enabled">تشخیص خودکار دامنه‌ها</string>
+    <string name="summary_pref_sniffing_enabled">دامنه مقصد را از ترافیک تشخیص می‌دهد تا مسیریابی دقیق‌تر انجام شود.</string>
+
+    <string name="title_pref_local_dns_enabled">DNS داخلی V2Ray</string>
+    <string name="summary_pref_local_dns_enabled">پردازش DNS توسط هسته V2Ray. برای مسیریابی و جلوگیری از نشت DNS پیشنهاد می‌شود.</string>
+
+    <string name="title_pref_fake_dns_enabled">Fake DNS</string>
+    <string name="summary_pref_fake_dns_enabled">برای افزایش سرعت تشخیص دامنه IP مجازی برمی‌گرداند؛ ممکن است با برخی برنامه‌ها سازگار نباشد.</string>
+
+    <string name="title_pref_forward_ipv6">عبور ترافیک IPv6</string>
+    <string name="summary_pref_forward_ipv6">ترافیک IPv6 را از VPN عبور می‌دهد. حالت آزمایشی.</string>
+
+    <string name="title_pref_routing">مسیریابی</string>
+    <string name="title_pref_routing_domain_strategy">روش تشخیص دامنه و IP</string>
+    <string name="title_pref_routing_mode">حالت مسیریابی</string>
+    <string name="title_pref_routing_custom">قوانین مسیریابی سفارشی</string>
+
+    <string name="title_pref_donate">Donate</string>
+    <string name="summary_pref_donate">Donate developer</string>
+    <string name="donate_detail">Add some experimental advanced features</string>
+
+    <string name="title_pref_remote_dns">DNS خارجی</string>
+    <string name="summary_pref_remote_dns">DNS مورد استفاده برای مقصدهای خارجی</string>
+
+    <string name="title_pref_vpn_dns">DNS رابط VPN</string>
+
+    <string name="title_pref_domestic_dns">DNS مستقیم</string>
+    <string name="summary_pref_domestic_dns">DNS مورد استفاده برای اتصال‌های مستقیم</string>
+
+    <string name="title_pref_socks_port">پورت SOCKS5</string>
+    <string name="summary_pref_socks_port">پورت پروکسی محلی SOCKS5</string>
+
+    <string name="title_pref_http_port">پورت HTTP</string>
+    <string name="summary_pref_http_port">پورت پروکسی محلی HTTP</string>
+
+    <string name="title_pref_local_dns_port">پورت DNS داخلی</string>
+    <string name="summary_pref_local_dns_port">پورت سرویس DNS داخلی</string>
+
+    <string name="title_pref_feedback">Feedback</string>
+    <string name="summary_pref_feedback">Feedback enhancements or bugs to GitHub</string>
+    <string name="summary_pref_tg_group">Join Telegram Group</string>
+    <string name="toast_tg_app_not_found">Telegram app not found</string>
+
+    <string name="title_pref_promotion">Promotion</string>
+    <string name="summary_pref_promotion">Promotion,click for details(Donation can be removed)</string>
+
+    <string name="title_mode">حالت اتصال</string>
+    <string name="title_mode_help">راهنمای حالت اتصال</string>
+
+    <string name="donate_error_setup">Error Setup:</string>
+    <string name="donate_error_inventory">Error querying inventory</string>
+    <string name="donate_error_purchase1">Error Purchase:</string>
+    <string name="donate_error_purchase2">Error Purchase,Authenticity verification failed.</string>
+    <string name="donate_success_purchase">Thank you for your donation!</string>
+    <string name="donate_item_click">Donate</string>
+    <string name="donate_item_paypal">Paypal</string>
+
+    <string name="title_logcat">Logcat</string>
+    <string name="logcat_copy">Copy</string>
+    <string name="logcat_delete">Delete</string>
+    <string name="title_export_all">اشتراک‌گذاری کانفیگ‌ها</string>
+    <string name="title_sub_setting">اشتراک‌ها</string>
+    <string name="sub_setting_remarks">نام اشتراک</string>
+    <string name="sub_setting_url">آدرس اشتراک</string>
+    <string name="title_sub_update">بروزرسانی اشتراک‌ها</string>
+    <string name="title_ping_all_server">پینگ همه</string>
+
+    <string name="tasker_start_service">Start Service</string>
+    <string name="tasker_setting_confirm">Confirm</string>
+
+    <string name="routing_settings_title">تنظیمات مسیریابی</string>
+    <string name="routing_settings_tips">آدرس‌ها را با ویرگول جدا کنید و سپس ذخیره را بزنید.</string>
+    <string name="routing_settings_save">ذخیره</string>
+    <string name="routing_settings_delete">پاک کردن</string>
+    <string name="routing_settings_scan_replace">اسکن و جایگزینی</string>
+    <string name="routing_settings_scan_append">اسکن و افزودن</string>
+    <string name="routing_settings_default_rules">قوانین پیش‌فرض</string>
+
+    <string name="connection_test_pending">تست اتصال</string>
+    <string name="connection_test_testing">در حال تست...</string>
+    <string name="connection_test_available">اتصال برقرار است — زمان پاسخ %dms</string>
+    <string name="connection_test_error">Fail to detect internet connection: %s</string>
+    <string name="connection_test_fail">اینترنت در دسترس نیست</string>
+    <string name="connection_test_error_status_code">Error code: #%d</string>
+    <string name="connection_connected">متصل</string>
+    <string name="connection_not_connected">قطع</string>
+
+    <string-array name="share_method">
+        <item>QRcode</item>
+        <item>Export to clipboard</item>
+        <item>Export full configuration to clipboard</item>
+    </string-array>
+
+    <string-array name="routing_tag">
+        <item>proxy URL or IP</item>
+        <item>direct URL or IP</item>
+        <item>blocked URL or IP</item>
+    </string-array>
+
+    <string-array name="routing_mode">
+        <item>همه ترافیک از VPN</item>
+        <item>شبکه محلی مستقیم</item>
+        <item>آدرس‌های داخلی مستقیم</item>
+        <item>شبکه محلی و آدرس‌های داخلی مستقیم</item>
+    </string-array>
+    <string name="title_pref_proxy_sharing_enabled">اشتراک‌گذاری پروکسی در شبکه</string>
+    <string name="summary_pref_proxy_sharing_enabled">اجازه می‌دهد دستگاه‌های شبکه محلی از SOCKS/HTTP این دستگاه استفاده کنند.</string>
+    <string name="toast_warning_pref_proxysharing">اشتراک‌گذاری پروکسی فعال شد. فقط در شبکه مطمئن استفاده کنید.</string>
+    <string name="toast_warning_pref_proxysharing_short">اشتراک‌گذاری پروکسی فعال است.</string>
+    <string name="toast_malformed_josn">ساختار کانفیگ نامعتبر است</string>
+
+    <string-array name="mode_entries">
+        <item>VPN کامل</item>
+        <item>فقط پروکسی</item>
+    </string-array>
+
+
+    <string name="baz_free_config">دریافت کانفیگ رایگان بازکد</string>
+    <string name="baz_fastest_connect">سریع‌ترین سرور</string>
+    <string name="baz_reconnect_now">اتصال مجدد</string>
+    <string name="baz_downloading_free">در حال دریافت کانفیگ رایگان...</string>
+    <string name="baz_free_success">کانفیگ رایگان وارد شد</string>
+    <string name="baz_free_failed">دریافت رایگان ناموفق بود</string>
+    <string name="baz_testing_fastest">در حال پیدا کردن سریع‌ترین سرور...</string>
+    <string name="baz_fastest_selected">سریع‌ترین سرور انتخاب و متصل شد</string>
+    <string name="baz_no_fast_server">سرور سالمی پیدا نشد</string>
+    <string name="baz_auto_reconnect">اتصال مجدد خودکار</string>
+    <string name="baz_auto_reconnect_summary">در قطع ناخواسته VPN دوباره متصل شود</string>
+
+    <string name="baz_quick_free">کانفیگ رایگان</string>
+    <string name="baz_quick_ping_all">پینگ همه</string>
+    <string name="baz_quick_fastest">سریع‌ترین</string>
+    <string name="baz_ping_one">پینگ</string>
+    <string name="baz_dashboard_hint">سرور را انتخاب کنید و برای اتصال دکمه پایین را بزنید</string>
+
+
+    <string name="baz_share_title">اشتراک VPN برای کلاینت‌ها</string>
+    <string name="baz_share_enabled">اشتراک VPN روشن است</string>
+    <string name="baz_share_disabled">اشتراک VPN خاموش است</string>
+    <string name="baz_share_waiting">در انتظار هات‌اسپات و اتصال VPN</string>
+    <string name="baz_share_active">در حال اشتراک VPN با کلاینت‌های هات‌اسپات</string>
+    <string name="baz_share_switch">اشتراک خودکار VPN</string>
+
+    <string name="baz_add_vless">افزودن دستی VLESS</string>
+    <string name="baz_add_trojan">افزودن دستی Trojan</string>
+    <string name="baz_restart_service">ریستارت سرویس VPN</string>
+    <string name="baz_delete_all">حذف همه کانفیگ‌ها</string>
+    <string name="baz_sort_tcping">مرتب‌سازی بر اساس TCPing</string>
+    <string name="baz_real_delay">تست Real Delay</string>
+    <string name="baz_connect">اتصال</string>
+    <string name="baz_disconnect">قطع</string>
+    <string name="baz_bottom_ping">پینگ همه</string>
+    <string name="baz_bottom_fastest">سریع‌ترین</string>
+    <string name="baz_share_on">اشتراک VPN روشن شد</string>
+    <string name="baz_share_off">اشتراک VPN خاموش شد</string>
+    <string name="baz_sub_downloading">در حال دریافت لینک اشتراک...</string>
+    <string name="baz_sub_imported">کانفیگ‌های اشتراک وارد شدند</string>
+    <string name="baz_sub_failed">دریافت یا پردازش اشتراک ناموفق بود</string>
+    <string name="baz_delete_all_done">همه کانفیگ‌ها حذف شدند</string>
+    <string name="baz_delete_bad">حذف کانفیگ‌های بدون پاسخ</string>
+    <string name="baz_delete_bad_done">کانفیگ‌های بدون پاسخ حذف شدند</string>
+    <string name="baz_sorted">لیست بر اساس پینگ مرتب شد</string>
+    <string name="baz_restarted">سرویس VPN ریستارت شد</string>
+</resources>

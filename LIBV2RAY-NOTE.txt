@@ -1,0 +1,6 @@
+libv2ray.aar is intentionally NOT included in this archive because GitHub web upload rejects files over 25 MB.
+
+GitHub Actions downloads the official v2rayNG 1.6.30 libv2ray.aar automatically before building.
+
+If you build locally, place the original file at:
+V2rayNG/app/libs/libv2ray.aar

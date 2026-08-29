@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+ <item android:icon="@drawable/ic_add_white_24dp" android:title="@string/menu_item_add_config" app:showAsAction="always"><menu>
+  <item android:id="@+id/baz_free_config" android:title="@string/baz_free_config" app:showAsAction="never" />
+  <item android:id="@+id/import_qrcode" android:title="@string/menu_item_import_config_qrcode" app:showAsAction="never" />
+  <item android:id="@+id/import_clipboard" android:title="@string/menu_item_import_config_clipboard" app:showAsAction="never" />
+  <item android:id="@+id/import_manually_vmess" android:title="@string/menu_item_import_config_manually_vmess" app:showAsAction="never" />
+  <item android:id="@+id/import_manually_vless" android:title="@string/baz_add_vless" app:showAsAction="never" />
+  <item android:id="@+id/import_manually_trojan" android:title="@string/baz_add_trojan" app:showAsAction="never" />
+  <item android:id="@+id/import_manually_ss" android:title="@string/menu_item_import_config_manually_ss" app:showAsAction="never" />
+  <item android:id="@+id/import_manually_socks" android:title="@string/menu_item_import_config_manually_socks" app:showAsAction="never" />
+  <item android:icon="@drawable/ic_add_white_24dp" android:title="@string/menu_item_import_config_custom" app:showAsAction="never"><menu>
+   <item android:id="@+id/import_config_custom_clipboard" android:title="@string/menu_item_import_config_custom_clipboard" app:showAsAction="never" />
+   <item android:id="@+id/import_config_custom_local" android:title="@string/menu_item_import_config_custom_local" app:showAsAction="never" />
+   <item android:id="@+id/import_config_custom_url" android:title="@string/menu_item_import_config_custom_url" app:showAsAction="never" />
+   <item android:id="@+id/import_config_custom_url_scan" android:title="@string/menu_item_import_config_custom_url_scan" app:showAsAction="never" />
+  </menu></item>
+ </menu></item>
+ <item android:id="@+id/restart_service" android:title="@string/baz_restart_service" app:showAsAction="never" />
+ <item android:id="@+id/delete_all" android:title="@string/baz_delete_all" app:showAsAction="never" />
+ <item android:id="@+id/delete_bad" android:title="@string/baz_delete_bad" app:showAsAction="never" />
+ <item android:id="@+id/sub_update" android:title="@string/title_sub_update" app:showAsAction="never" />
+ <item android:id="@+id/sort_tcping" android:title="@string/baz_sort_tcping" app:showAsAction="never" />
+ <item android:id="@+id/ping_all" android:title="@string/title_ping_all_server" app:showAsAction="never" />
+ <item android:id="@+id/real_delay" android:title="@string/baz_real_delay" app:showAsAction="never" />
+ <item android:id="@+id/export_all" android:title="@string/title_export_all" app:showAsAction="never" />
+</menu>

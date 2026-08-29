@@ -1,0 +1,23 @@
+# Android / Gradle
+.gradle/
+**/build/
+local.properties
+.idea/
+*.iml
+.cxx/
+.externalNativeBuild/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Generated APK/output
+BUILT_APK/
+OUTPUT_APK/
+artifacts/
+*.apk
+
+# Local portable build tools
+.portable-build/
+build-tools-local/

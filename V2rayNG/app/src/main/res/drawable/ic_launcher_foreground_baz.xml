@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Signal/broadcast icon centered in adaptive icon safe zone -->
+    <group
+        android:translateX="28"
+        android:translateY="22">
+        <!-- Vertical line -->
+        <path
+            android:pathData="M26,0 L26,64"
+            android:strokeWidth="4.5"
+            android:strokeColor="#FFFFFF"
+            android:strokeLineCap="round"/>
+        <!-- Small arc -->
+        <path
+            android:pathData="M26,8 C36,8 42,13 42,18 C42,23 36,25 30,25"
+            android:strokeWidth="4.5"
+            android:strokeColor="#FFFFFF"
+            android:strokeLineCap="round"
+            android:fillColor="#00000000"/>
+        <!-- Large arc -->
+        <path
+            android:pathData="M26,32 C40,32 46,39 46,44 C46,49 40,56 26,56"
+            android:strokeWidth="4.5"
+            android:strokeColor="#FFFFFF"
+            android:strokeLineCap="round"
+            android:fillColor="#00000000"/>
+        <!-- Arrow -->
+        <path
+            android:pathData="M50,20 L58,28 L50,36"
+            android:strokeWidth="4"
+            android:strokeColor="#FFFFFF"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round"
+            android:fillColor="#00000000"/>
+    </group>
+</vector>
