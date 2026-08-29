@@ -31,6 +31,9 @@ jobs:
           java-version: 17
           cache: gradle
 
+      - name: Verify Java 17 installation
+        run: java -version
+
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
