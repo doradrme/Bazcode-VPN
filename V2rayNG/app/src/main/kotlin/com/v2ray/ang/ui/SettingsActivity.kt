@@ -64,7 +64,7 @@ class SettingsActivity : BaseActivity() {
         }
 
         private fun isRunning(): Boolean {
-            return false //TODO no point of adding logic now since Settings will be changed soon
+            return activity?.intent?.getBooleanExtra("isRunning", false) == true
         }
 
         override fun onCreatePreferences(bundle: Bundle?, s: String?) {
