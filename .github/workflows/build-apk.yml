@@ -7,10 +7,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-# Temporary, version-scoped permission used only by the exact 1.6.4 publish commit.
-permissions:
-  contents: write
-
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -91,15 +87,3 @@ jobs:
           path: artifacts/*.apk
           if-no-files-found: error
           retention-days: 14
-
-      - name: Publish Bazcode VPN 1.6.4
-        if: success() && github.event_name == 'push' && github.event.head_commit.message == 'Publish Bazcode VPN 1.6.4'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          VERSION=$(sed -n 's/.*versionName "\([^"]*\)".*/\1/p' V2rayNG/app/build.gradle | head -n 1)
-          test "$VERSION" = "1.6.4"
-          gh release create v1.6.4 artifacts/*.apk \
-            --target "$GITHUB_SHA" \
-            --title "Bazcode VPN 1.6.4" \
-            --notes "Real Delay All now tests every configuration through an isolated Xray proxy without stopping the active VPN or changing the selected server. Versioned APKs are attached for ARMv7, ARM64, x86, x86_64, and universal devices."
