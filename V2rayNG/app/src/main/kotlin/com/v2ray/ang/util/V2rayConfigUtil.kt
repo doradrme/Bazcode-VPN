@@ -45,6 +45,51 @@ object V2rayConfigUtil {
     }
 
     /**
+     * Builds an isolated proxy-only config for a real connectivity test.
+     * The regular VPN config and selected server are never modified.
+     */
+    fun getV2rayConfig4RealDelay(context: Context, guid: String, httpPort: Int): Result {
+        val source = getV2rayConfig(context, guid)
+        if (!source.status) return source
+
+        return try {
+            val root = JsonParser().parse(source.content).asJsonObject
+            val outbounds = root.getAsJsonArray("outbounds")
+                ?: return Result(false, "")
+            if (outbounds.size() == 0) return Result(false, "")
+
+            val firstOutbound = outbounds[0].asJsonObject
+            val outboundTag = firstOutbound.get("tag")?.asString?.takeIf { it.isNotBlank() } ?: "proxy"
+            firstOutbound.addProperty("tag", outboundTag)
+
+            val inbound = JsonObject().apply {
+                addProperty("tag", "real-delay")
+                addProperty("listen", "127.0.0.1")
+                addProperty("port", httpPort)
+                addProperty("protocol", "http")
+                add("settings", JsonObject())
+            }
+            root.add("inbounds", JsonArray().apply { add(inbound) })
+
+            val rule = JsonObject().apply {
+                addProperty("type", "field")
+                add("inboundTag", JsonArray().apply { add(JsonPrimitive("real-delay")) })
+                addProperty("outboundTag", outboundTag)
+            }
+            root.add("routing", JsonObject().apply {
+                addProperty("domainStrategy", "AsIs")
+                add("rules", JsonArray().apply { add(rule) })
+            })
+            root.remove("stats")
+            root.remove("policy")
+            Result(true, Gson().toJson(root))
+        } catch (e: Exception) {
+            Log.d(ANG_PACKAGE, "Unable to build real-delay config", e)
+            Result(false, "")
+        }
+    }
+
+    /**
      * 生成v2ray的客户端配置文件
      */
     private fun getV2rayNonCustomConfig(context: Context, outbound: V2rayConfig.OutboundBean): Result {

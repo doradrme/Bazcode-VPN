@@ -163,7 +163,25 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 AppConfig.MSG_STATE_STOP_SUCCESS -> {
                     isRunning.value = false
                 }
+                AppConfig.MSG_MEASURE_CONFIG_NOTIFY -> {
+                    val parts = intent.getStringExtra("content").orEmpty().split('|')
+                    val guid = parts.getOrNull(0).orEmpty()
+                    val index = serverList.indexOf(guid)
+                    if (index >= 0) updateListAction.value = index
+                    val completed = parts.getOrNull(2)?.toIntOrNull() ?: 0
+                    val total = parts.getOrNull(3)?.toIntOrNull() ?: serverList.size
+                    updateTestResultAction.value = getApplication<AngApplication>()
+                        .getString(R.string.baz_real_delay_progress, completed, total)
+                }
+                AppConfig.MSG_MEASURE_CONFIG_FINISH -> {
+                    updateTestResultAction.value = getApplication<AngApplication>()
+                        .getString(R.string.baz_real_delay_done)
+                }
             }
         }
+    }
+
+    fun testAllRealPing() {
+        MessageUtil.sendMsg2Service(getApplication(), AppConfig.MSG_MEASURE_CONFIG, "")
     }
 }

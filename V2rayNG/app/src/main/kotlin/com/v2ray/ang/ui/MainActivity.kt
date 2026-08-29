@@ -29,7 +29,6 @@ import com.v2ray.ang.R
 import com.v2ray.ang.databinding.ActivityMainBinding
 import com.v2ray.ang.dto.EConfigType
 import com.v2ray.ang.extension.toast
-import com.v2ray.ang.extension.responseLength
 import com.v2ray.ang.helper.SimpleItemTouchHelperCallback
 import com.v2ray.ang.service.V2RayServiceManager
 import com.v2ray.ang.util.AngConfigManager
@@ -38,9 +37,7 @@ import com.v2ray.ang.util.Utils
 import com.v2ray.ang.viewmodel.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import libv2ray.Libv2ray
 import me.drakeet.support.toast.ToastCompat
 import rx.Observable
@@ -285,7 +282,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
         R.id.sort_tcping -> { mainViewModel.sortByTcping(); true }
         R.id.real_delay -> {
-            if (mainViewModel.isRunning.value == true) bazRealDelayAll() else toast(R.string.connection_not_connected)
+            if (mainViewModel.isRunning.value == true) {
+                mainViewModel.testAllRealPing()
+                toast(getString(R.string.baz_real_delay_started, mainViewModel.serverList.size))
+            } else toast(R.string.connection_not_connected)
             true
         }
         R.id.export_all -> {
@@ -630,79 +630,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                     toast(R.string.toast_failure)
                 }
             }
-        }
-    }
-
-    private fun bazRealDelayAll() {
-        val servers = mainViewModel.serverList.toList()
-        val originalServer = mainStorage?.decodeString(MmkvManager.KEY_SELECTED_SERVER).orEmpty()
-        if (servers.isEmpty() || originalServer.isBlank()) {
-            toast(R.string.toast_none_data)
-            return
-        }
-
-        GlobalScope.launch(Dispatchers.Main) {
-            toast(getString(R.string.baz_real_delay_started, servers.size))
-            servers.forEachIndexed { index, guid ->
-                binding.tvTestState.text = getString(R.string.baz_real_delay_progress, index + 1, servers.size)
-                Utils.stopVService(this@MainActivity)
-                waitForVpnState(false, 6000L)
-                mainStorage?.encode(MmkvManager.KEY_SELECTED_SERVER, guid)
-                V2RayServiceManager.startV2Ray(this@MainActivity)
-
-                val started = waitForVpnState(true, 12000L)
-                val delayResult = if (started) {
-                    delay(700L)
-                    withContext(Dispatchers.IO) { bazTestConnectionDelay(10808) }
-                } else {
-                    -1L
-                }
-                MmkvManager.encodeServerTestDelayMillis(guid, delayResult)
-                mainViewModel.updateListAction.value = mainViewModel.serverList.indexOf(guid)
-            }
-
-            Utils.stopVService(this@MainActivity)
-            waitForVpnState(false, 6000L)
-            mainStorage?.encode(MmkvManager.KEY_SELECTED_SERVER, originalServer)
-            V2RayServiceManager.startV2Ray(this@MainActivity)
-            waitForVpnState(true, 12000L)
-            binding.tvTestState.text = getString(R.string.connection_connected)
-            toast(R.string.baz_real_delay_done)
-        }
-    }
-
-    private suspend fun waitForVpnState(expected: Boolean, timeoutMs: Long): Boolean {
-        val startedAt = android.os.SystemClock.elapsedRealtime()
-        while (android.os.SystemClock.elapsedRealtime() - startedAt < timeoutMs) {
-            if (mainViewModel.isRunning.value == expected) return true
-            delay(200L)
-        }
-        return mainViewModel.isRunning.value == expected
-    }
-
-    private fun bazTestConnectionDelay(socksPort: Int): Long {
-        var connection: java.net.HttpURLConnection? = null
-        return try {
-            val proxy = java.net.Proxy(
-                java.net.Proxy.Type.HTTP,
-                java.net.InetSocketAddress("127.0.0.1", socksPort + 1)
-            )
-            connection = java.net.URL("http://www.google.com/generate_204")
-                .openConnection(proxy) as java.net.HttpURLConnection
-            connection.connectTimeout = 10000
-            connection.readTimeout = 10000
-            connection.setRequestProperty("Connection", "close")
-            connection.instanceFollowRedirects = false
-            connection.useCaches = false
-            val startedAt = android.os.SystemClock.elapsedRealtime()
-            val code = connection.responseCode
-            val elapsed = android.os.SystemClock.elapsedRealtime() - startedAt
-            if (code == 204 || code == 200 && connection.responseLength == 0L) elapsed else -1L
-        } catch (e: Exception) {
-            Log.d(ANG_PACKAGE, "Real Delay failed: ${e.message}")
-            -1L
-        } finally {
-            connection?.disconnect()
         }
     }
 

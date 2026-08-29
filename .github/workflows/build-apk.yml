@@ -69,6 +69,16 @@ jobs:
           find V2rayNG/app/build/outputs/apk -type f -name "*.apk" -exec cp {} artifacts/ \; 2>/dev/null || true
           ls -lah artifacts || true
 
+      - name: Name versioned APKs
+        if: success()
+        run: |
+          VERSION=$(sed -n 's/.*versionName "\([^"]*\)".*/\1/p' V2rayNG/app/build.gradle | head -n 1)
+          for apk in artifacts/*.apk; do
+            base=$(basename "$apk")
+            mv "$apk" "artifacts/Bazcode-VPN-${VERSION}-${base}"
+          done
+          ls -lah artifacts
+
       - name: Upload APK artifact
         if: success()
         uses: actions/upload-artifact@v4

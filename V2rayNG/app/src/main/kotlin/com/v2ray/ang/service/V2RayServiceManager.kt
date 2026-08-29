@@ -30,6 +30,8 @@ import go.Seq
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import libv2ray.Libv2ray
 import libv2ray.V2RayPoint
 import libv2ray.V2RayVPNServiceSupportsSet
@@ -37,6 +39,11 @@ import rx.Observable
 import rx.Subscription
 import java.lang.ref.SoftReference
 import kotlin.math.min
+import java.net.HttpURLConnection
+import java.net.InetSocketAddress
+import java.net.Proxy
+import java.net.URL
+import android.os.SystemClock
 
 object V2RayServiceManager {
     private const val NOTIFICATION_ID = 1
@@ -65,6 +72,10 @@ object V2RayServiceManager {
     private var mBuilder: NotificationCompat.Builder? = null
     private var mSubscription: Subscription? = null
     private var mNotificationManager: NotificationManager? = null
+    private var realDelayJob: Job? = null
+
+    private const val REAL_DELAY_HTTP_PORT = 20809
+    private const val REAL_DELAY_TIMEOUT_MS = 10000
 
     fun startV2Ray(context: Context) {
         if (settingsStorage?.decodeBool(AppConfig.PREF_PROXY_SHARING) == true) {
@@ -126,6 +137,90 @@ object V2RayServiceManager {
             }
         }
 
+    }
+
+    private class RealDelayCallback : V2RayVPNServiceSupportsSet {
+        override fun shutdown() = 0L
+        override fun prepare() = 0L
+        override fun setup(s: String) = 0L
+        override fun onEmitStatus(l: Long, s: String?) = 0L
+        override fun protect(l: Long): Long {
+            val control = serviceControl?.get() ?: return 1L
+            return if (control.vpnProtect(l.toInt())) 0L else 1L
+        }
+    }
+
+    fun startRealDelayAll() {
+        val service = serviceControl?.get()?.getService() ?: return
+        if (realDelayJob?.isActive == true) return
+
+        realDelayJob = GlobalScope.launch(Dispatchers.IO) {
+            val guids = MmkvManager.decodeServerList().toList()
+            MmkvManager.clearAllTestDelayResults()
+            guids.forEachIndexed { index, guid ->
+                val result = measureConfigRealDelay(service, guid)
+                MmkvManager.encodeServerTestDelayMillis(guid, result)
+                MessageUtil.sendMsg2UI(
+                    service,
+                    AppConfig.MSG_MEASURE_CONFIG_NOTIFY,
+                    "$guid|$result|${index + 1}|${guids.size}"
+                )
+            }
+            MessageUtil.sendMsg2UI(service, AppConfig.MSG_MEASURE_CONFIG_FINISH, guids.size.toString())
+        }
+    }
+
+    private suspend fun measureConfigRealDelay(context: Context, guid: String): Long {
+        val result = V2rayConfigUtil.getV2rayConfig4RealDelay(context, guid, REAL_DELAY_HTTP_PORT)
+        if (!result.status) return -1L
+        val config = MmkvManager.decodeServerConfig(guid) ?: return -1L
+        val point = Libv2ray.newV2RayPoint(RealDelayCallback())
+
+        return try {
+            point.packageName = Utils.packagePath(context)
+            point.packageCodePath = context.applicationInfo.nativeLibraryDir + "/"
+            point.configureFileContent = result.content
+            point.domainName = config.getV2rayPointDomainAndPort()
+            point.enableLocalDNS = false
+            point.forwardIpv6 = false
+            point.proxyOnly = true
+            point.runLoop()
+            if (!point.isRunning) return -1L
+            delay(300L)
+            testHttpProxyDelay(REAL_DELAY_HTTP_PORT)
+        } catch (e: Exception) {
+            Log.d(ANG_PACKAGE, "Real delay failed for $guid", e)
+            -1L
+        } finally {
+            try {
+                if (point.isRunning) point.stopLoop()
+            } catch (e: Exception) {
+                Log.d(ANG_PACKAGE, "Unable to stop real-delay core", e)
+            }
+            delay(100L)
+        }
+    }
+
+    private fun testHttpProxyDelay(port: Int): Long {
+        var connection: HttpURLConnection? = null
+        return try {
+            connection = URL("http://www.google.com/generate_204").openConnection(
+                Proxy(Proxy.Type.HTTP, InetSocketAddress("127.0.0.1", port))
+            ) as HttpURLConnection
+            connection.connectTimeout = REAL_DELAY_TIMEOUT_MS
+            connection.readTimeout = REAL_DELAY_TIMEOUT_MS
+            connection.setRequestProperty("Connection", "close")
+            connection.instanceFollowRedirects = false
+            connection.useCaches = false
+            val startedAt = SystemClock.elapsedRealtime()
+            val code = connection.responseCode
+            val elapsed = SystemClock.elapsedRealtime() - startedAt
+            if (code == 204 || code == 200 && connection.contentLength == 0) elapsed else -1L
+        } catch (e: Exception) {
+            -1L
+        } finally {
+            connection?.disconnect()
+        }
     }
 
     fun startV2rayPoint() {
@@ -216,6 +311,9 @@ object V2RayServiceManager {
                 }
                 AppConfig.MSG_STATE_RESTART -> {
                     startV2rayPoint()
+                }
+                AppConfig.MSG_MEASURE_CONFIG -> {
+                    startRealDelayAll()
                 }
             }
 

@@ -16,8 +16,8 @@ android {
         minSdkVersion 17
         targetSdkVersion Integer.parseInt("$targetSdkVer")
         multiDexEnabled true
-        versionCode 212
-        versionName "1.6.30-bazcode"
+        versionCode 213
+        versionName "1.6.4"
     }
 
     buildTypes {

@@ -79,4 +79,7 @@ object AppConfig {
     const val MSG_STATE_STOP = 4
     const val MSG_STATE_STOP_SUCCESS = 41
     const val MSG_STATE_RESTART = 5
+    const val MSG_MEASURE_CONFIG = 6
+    const val MSG_MEASURE_CONFIG_NOTIFY = 61
+    const val MSG_MEASURE_CONFIG_FINISH = 62
 }
