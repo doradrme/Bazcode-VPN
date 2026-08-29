@@ -235,7 +235,10 @@
     <string name="baz_restart_service">ریستارت سرویس VPN</string>
     <string name="baz_delete_all">حذف همه کانفیگ‌ها</string>
     <string name="baz_sort_tcping">مرتب‌سازی بر اساس TCPing</string>
-    <string name="baz_real_delay">تست Real Delay</string>
+    <string name="baz_real_delay">Real Delay همه سرورها</string>
+    <string name="baz_real_delay_started">تست واقعی %1$d سرور شروع شد</string>
+    <string name="baz_real_delay_progress">Real Delay: سرور %1$d از %2$d</string>
+    <string name="baz_real_delay_done">تست Real Delay همه سرورها تمام شد</string>
     <string name="baz_connect">اتصال</string>
     <string name="baz_disconnect">قطع</string>
     <string name="baz_bottom_ping">پینگ همه</string>
