@@ -24,14 +24,14 @@ jobs:
             -o V2rayNG/app/libs/libv2ray.aar
           ls -lh V2rayNG/app/libs/libv2ray.aar
 
-      - name: Set up JDK 11
+      - name: Set up JDK 17 for Android SDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 11
+          java-version: 17
           cache: gradle
 
-      - name: Verify Java 11 installation
+      - name: Verify Java 17 installation
         run: java -version
 
       - name: Set up Android SDK
@@ -41,6 +41,13 @@ jobs:
         run: |
           yes | sdkmanager --licenses >/dev/null || true
           sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.2"
+
+      - name: Set up JDK 11 for Gradle
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 11
+          cache: gradle
 
       - name: Show environment
         run: |
