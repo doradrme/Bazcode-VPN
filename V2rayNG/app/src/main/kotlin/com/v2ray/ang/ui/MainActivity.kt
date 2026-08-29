@@ -652,7 +652,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 val started = waitForVpnState(true, 12000L)
                 val delayResult = if (started) {
                     delay(700L)
-                    withContext(Dispatchers.IO) { Utils.testConnectionDelay(10808) }
+                    withContext(Dispatchers.IO) { bazTestConnectionDelay(10808) }
                 } else {
                     -1L
                 }
@@ -677,6 +677,32 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             delay(200L)
         }
         return mainViewModel.isRunning.value == expected
+    }
+
+    private fun bazTestConnectionDelay(socksPort: Int): Long {
+        var connection: java.net.HttpURLConnection? = null
+        return try {
+            val proxy = java.net.Proxy(
+                java.net.Proxy.Type.HTTP,
+                java.net.InetSocketAddress("127.0.0.1", socksPort + 1)
+            )
+            connection = java.net.URL("http://www.google.com/generate_204")
+                .openConnection(proxy) as java.net.HttpURLConnection
+            connection.connectTimeout = 10000
+            connection.readTimeout = 10000
+            connection.setRequestProperty("Connection", "close")
+            connection.instanceFollowRedirects = false
+            connection.useCaches = false
+            val startedAt = android.os.SystemClock.elapsedRealtime()
+            val code = connection.responseCode
+            val elapsed = android.os.SystemClock.elapsedRealtime() - startedAt
+            if (code == 204 || code == 200 && connection.responseLength == 0L) elapsed else -1L
+        } catch (e: Exception) {
+            Log.d(ANG_PACKAGE, "Real Delay failed: ${e.message}")
+            -1L
+        } finally {
+            connection?.disconnect()
+        }
     }
 
     /**
