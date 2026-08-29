@@ -16,7 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-
       - name: Download official libv2ray.aar from v2rayNG 1.6.30
         run: |
           mkdir -p V2rayNG/app/libs
@@ -29,7 +28,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: 17
           cache: gradle
 
       - name: Set up Android SDK
